@@ -33,51 +33,55 @@ def predict_note_authentication(X):
     This is using docstrings for specifications.
     ---
     parameters:  
-      - name: age
+      - name: Age
         in: query
         type: number
         required: true
-      - name: sex
+      - name: Sex
         in: query
         type: number
         required: true
-      - name: cp
+      - name: Chest Pain Type
         in: query
         type: number
         required: true
-      - name: trestbps
+      - name: Resting Blood Pressure
         in: query
         type: number
         required: true
-      - name: chol
+      - name: Serum Cholestoral
         in: query
         type: number
         required: true
-      - name: fbs
+      - name: Fasting Blood Sugar
         in: query
         type: number
         required: true
-      - name: thalach
+      - name: Resting Electrocardiographic Results
         in: query
         type: number
         required: true
-      - name: exang
+      - name: Maximum Heart Rate Achieved
         in: query
         type: number
         required: true
-      - name: oldpeak
+      - name: Exercise Induced Angina
         in: query
         type: number
         required: true
-      - name: slope
+      - name: ST depression induced by exercise relative to rest 
         in: query
         type: number
         required: true
-      - name: ca
+      - name: Slope of the peak exercise ST segment
         in: query
         type: number
         required: true
-      - name: thal
+      - name: Number of major vessels (0-3) colored by flourosopy
+        in: query
+        type: number
+        required: true
+      - name: Thal
         in: query
         type: number
         required: true                                        
@@ -94,7 +98,7 @@ def predict_note_authentication(X):
 
     #print(prediction[0])
     if(int(prediction[0]) != 0):
-    	outputstr = 'Presence of Heart Disease'
+      outputstr = 'Presence of Heart Disease'
     return outputstr
 
 
@@ -107,19 +111,19 @@ def main():
     </div>
     """
     st.markdown(html_temp,unsafe_allow_html=True)
-    age = st.number_input("age",step=1.,format="%.2f") 
-    sex= st.number_input("sex",step=1.,format="%.2f")
-    cp= st.number_input("cp",step=1.,format="%.2f")
-    trestbps = st.number_input("trestbps",step=1.,format="%.2f")
-    chol = st.number_input("chol",step=1.,format="%.2f")
-    fbs = st.number_input("fbs",step=1.,format="%.2f")
-    restecg = st.number_input("restecg",step=1.,format="%.2f")
-    thalach = st.number_input("thalach",step=1.,format="%.2f")
-    exang = st.number_input("exang",step=1.,format="%.2f")
-    oldpeak = st.number_input("oldpeak",step=1.,format="%.2f")
-    slope = st.number_input("slope",step=1.,format="%.2f")
-    ca = st.number_input("ca",step=1.,format="%.2f")
-    thal = st.number_input("thal",step=1.,format="%.2f")
+    age = st.number_input("Age",step=1.,format="%.2f") 
+    sex= st.number_input("Sex",step=1.,format="%.2f")
+    cp= st.number_input("Chest Pain Type",step=1.,format="%.2f")
+    trestbps = st.number_input("Resting Blood Pressure",step=1.,format="%.2f")
+    chol = st.number_input("Serum Cholestoral",step=1.,format="%.2f")
+    fbs = st.number_input("Fasting Blood Sugar",step=1.,format="%.2f")
+    restecg = st.number_input("Resting Electrocardiographic Results",step=1.,format="%.2f")
+    thalach = st.number_input("Maximum Heart Rate Achieved",step=1.,format="%.2f")
+    exang = st.number_input("Exercise Induced Angina",step=1.,format="%.2f")
+    oldpeak = st.number_input("ST depression induced by exercise relative to rest ",step=1.,format="%.2f")
+    slope = st.number_input("Slope of the peak exercise ST segment",step=1.,format="%.2f")
+    ca = st.number_input("Number of major vessels (0-3) colored by flourosopy",step=1.,format="%.2f")
+    thal = st.number_input("Thal",step=1.,format="%.2f")
 
     inpu = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach,exang, oldpeak, slope, ca, thal]]
     test_dataset = pd.DataFrame(inpu, columns=['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal'])
