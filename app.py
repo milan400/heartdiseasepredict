@@ -94,11 +94,16 @@ def predict_note_authentication(X):
     prediction=clf.predict(X)
     #print(prediction)
 
-    outputstr = 'No Presence of Heart Disease'
+    pred_prob = clf.predict_proba(X)*100
+    value_likely = pred_prob[0][1]
+
+    outputstr = None
 
     #print(prediction[0])
     if(int(prediction[0]) != 0):
-      outputstr = 'Presence of Heart Disease'
+      outputstr = 'Presence of Heart Disease'+'('+str(value_likely)+'%)'
+    else:
+      outputstr='No Presence of Heart Disease'+'('+str(value_likely)+'%)'
     return outputstr
 
 
