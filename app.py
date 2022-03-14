@@ -116,19 +116,78 @@ def main():
     </div>
     """
     st.markdown(html_temp,unsafe_allow_html=True)
-    age = st.number_input("Age",step=1.,format="%.2f") 
-    sex= st.number_input("Sex",step=1.,format="%.2f")
-    cp= st.number_input("Chest Pain Type",step=1.,format="%.2f")
-    trestbps = st.number_input("Resting Blood Pressure",step=1.,format="%.2f")
-    chol = st.number_input("Serum Cholestoral",step=1.,format="%.2f")
-    fbs = st.number_input("Fasting Blood Sugar",step=1.,format="%.2f")
-    restecg = st.number_input("Resting Electrocardiographic Results",step=1.,format="%.2f")
-    thalach = st.number_input("Maximum Heart Rate Achieved",step=1.,format="%.2f")
-    exang = st.number_input("Exercise Induced Angina",step=1.,format="%.2f")
-    oldpeak = st.number_input("ST depression induced by exercise relative to rest ",step=1.,format="%.2f")
-    slope = st.number_input("Slope of the peak exercise ST segment",step=1.,format="%.2f")
-    ca = st.number_input("Number of major vessels (0-3) colored by flourosopy",step=1.,format="%.2f")
-    thal = st.number_input("Thal",step=1.,format="%.2f")
+
+    age = st.number_input("Age",step=1.,format="%.0f") 
+
+    sex = 1 if (st.radio("Sex", ('Male', 'Female')))=='Male' else 0
+
+    cp = st.radio("Chest Pain Type", ('Typical Angina', 'Atypical Angina', 'Non-Anginal Pain', 'Asymptomatic'))
+
+    if(cp=='Typical Angina'):
+      cp= 0
+    elif(cp=='Atypical Angina'):
+      cp= 1
+    elif(cp=='Non-Anginal Pain'):
+      cp= 2
+    else:
+      cp= 3 
+
+    trestbps = st.number_input("Resting Blood Pressure",step=1.,format="%.0f")
+    chol = st.number_input("Serum Cholestoral",step=1.,format="%.0f")
+
+
+    fbs = 1 if (st.radio("Fasting Blood Sugar > 120 mg/dl", ('True', 'False')))=='True' else 0
+
+
+    restecg = st.radio("Resting Electrocardiographic Results", ('Normal', 'ST-T Wave Abnormality', 'Probable or Definite Left Ventricular Hypertrophy'))
+
+    if(restecg=='Normal'):
+      restecg= 0
+    elif(restecg=='ST-T Wave Abnormality'):
+      restecg= 1
+    else:
+      restecg= 2
+
+
+    thalach = st.number_input("Maximum Heart Rate Achieved",step=1.,format="%.0f")
+
+    exang = 1 if (st.radio("Exercise Induced Angina", ('Yes', 'No')))=='Yes' else 0
+
+    oldpeak = st.number_input("ST depression induced by exercise relative to rest",step=1.,format="%.2f")    
+
+    slope = st.radio("Slope of the peak exercise ST segment", ('Upsloping', 'Flat', 'Downsloping'))
+
+    if(slope=='Upsloping'):
+      slope= 0
+    elif(slope=='Flat'):
+      slope= 1
+    else:
+      slope= 2
+
+
+    #ca = st.number_input("Number of major vessels (0-3) colored by flourosopy",step=1.,format="%.2f")
+    
+    ca = st.radio("Number of major vessels (0-3) colored by flourosopy", (0,1,2,3))
+
+    if(ca==0):
+      ca= 0
+    elif(ca==1):
+      ca= 1
+    elif(ca==2):
+      ca= 2
+    else:
+      ca= 3
+    
+
+    thal = st.radio("Thal", ('Normal', 'Fixed Defect', 'Reversable Defect'))
+
+    if(thal=='Normal'):
+      thal= 3
+    elif(thal=='Fixed Defect'):
+      thal= 6
+    else:
+      thal= 7
+    
 
     inpu = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach,exang, oldpeak, slope, ca, thal]]
     test_dataset = pd.DataFrame(inpu, columns=['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal'])
